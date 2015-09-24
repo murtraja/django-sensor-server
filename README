@@ -1,0 +1,6 @@
+1. install the packages mentioned in requirements.txt through pip (and virtualenv - optional but recommended)
+2. Connect to a network (wireless)
+3. run this server over that network
+4. navigate to /post/monitor
+		- installation link for sensors at /post
+5. read the live real time data coming from the sensors

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>Monitoring</title>
+</head>
+<body>
+
+    <table id = 'dataTable' border = 3 style = "font-size:2em">
+        <tr>
+            <th>From</th>
+            <th>Data</th>
+            <th>Time</th>
+        </tr>
+        
+    </table>
+
+
+    <script src = '{% static "js/jquery-2.1.4.js" %}'></script>
+    <script src = '{% static "js/ws4redis.js" %}'></script>
+    <script type = 'text/javascript'>
+
+        var WEBSOCKET_URI = "{{ WEBSOCKET_URI }}";
+        var WS4REDIS_HEARTBEAT = {{ WS4REDIS_HEARTBEAT }};
+        $(document).ready(function(){
+
+            var ws4redisBroadcast = WS4Redis({
+                uri: WEBSOCKET_URI+'sensor?subscribe-broadcast',
+                receive_message: receiveMessageBroadcast,
+                heartbeat_msg: WS4REDIS_HEARTBEAT
+            });
+
+            function receiveMessageBroadcast(message){
+
+                var message_original = message;
+                message = $.parseJSON(message);
+                listData(message.name, message.data);
+
+            }
+
+            function listData(name, data){
+                $('#dataTable tr:first').after("<tr><td>"+name+"</td><td>"+data+"</td><td>"+Date()+"</td></tr>");
+            }
+
+
+
+        });
+
+    </script>
+</body>
+</html>

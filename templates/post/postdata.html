@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>
+Join the blog!
+</title>
+</head>
+<body>
+<center>
+
+
+<input type = 'button' id = 'btn' value = 'post'/>
+<script src = "//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type='text/javascript'>
+
+$(document).ready(function(){
+	console.log("jquery ready");
+	$('#btn').click(function(){
+		$.post('.', {name:'mmr',data:'23.0'}, function(data){
+			alert(data);
+		});
+	});
+});
+
+</script
+
+</center>
+</body>
+</html>
